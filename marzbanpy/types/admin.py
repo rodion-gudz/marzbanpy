@@ -19,6 +19,7 @@ class Admin(Base):
         is_sudo: bool = False,
         telegram_id: int = 0,
         discord_webhook: str = "",
+        **kwargs
     ) -> None:
         self.username = username
         self.password = password
