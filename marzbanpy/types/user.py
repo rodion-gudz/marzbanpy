@@ -73,7 +73,6 @@ class User(Base):
         subscription_url: str | None = None,
         excluded_inbounds: dict[str, list[str]] | None = None,
         admin: dict | None = None,
-        *args,
         **kwargs
     ) -> None:
         self.username = username
