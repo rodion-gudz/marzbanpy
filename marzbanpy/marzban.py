@@ -50,6 +50,7 @@ class Marzban:
         ssl: bool = False,
         username: str,
         password: str,
+        verify: bool = True,
     ) -> None:
         """Initializes a new instance of the Marzban class.
 
@@ -66,6 +67,7 @@ class Marzban:
         self.protocol = "https" if ssl else "http"
         self.username = username
         self.password = password
+        self.verify = verify
 
     async def _send_request(
         self,
@@ -93,6 +95,7 @@ class Marzban:
                 headers=headers,
                 content=content,
                 params=query_params,
+                verify=self.verify,
             )
         else:
             response = await self.session.request(
@@ -101,6 +104,7 @@ class Marzban:
                 headers=headers,
                 data=data,
                 params=query_params,
+                verify=self.verify,
             )
         return MarzbanResponse(status=response.status_code, content=response.json())
 
