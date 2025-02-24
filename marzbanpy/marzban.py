@@ -40,7 +40,7 @@ class System(BaseModel):
 class Marzban:
     """The Marzban class represents a connection to a Marzban server. It provides a way to interact with the server, sending and receiving data."""
 
-    session: AsyncClient = AsyncClient(timeout=None)
+    session: AsyncClient = AsyncClient(timeout=None, verify=False)
 
     def __init__(
         self,
@@ -95,7 +95,6 @@ class Marzban:
                 headers=headers,
                 content=content,
                 params=query_params,
-                verify=self.verify,
             )
         else:
             response = await self.session.request(
@@ -104,7 +103,6 @@ class Marzban:
                 headers=headers,
                 data=data,
                 params=query_params,
-                verify=self.verify,
             )
         return MarzbanResponse(status=response.status_code, content=response.json())
 
